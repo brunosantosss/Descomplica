@@ -33,6 +33,3 @@ function initRecognition() {
 
     return gRecognition;
 }
-
-
-// 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
