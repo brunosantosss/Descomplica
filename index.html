@@ -8,14 +8,51 @@
     <title>Descomplica</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <body class="bg-slate-900">
-      <div class="flex flex-col">
-          <div class="border h-24 m-2 p-2 text"></div>
-          <button class="bg-indigo-500 mx-2 p-2">Pressione para falar</button>
-      </div>
+  <body>
+    <!-- NAVBAR -->
+    <header class="flex flex-row justify-between items-center py-9 px-12">
+          <h1 class="text-violet-600 font-semibold text-3xl underline">Descomplica</h1>
+          <div class="flex gap-5">
+            <a class="text-violet-600 font-medium text-2xl" href="/">Sobre Nós</a>
+            <a class="text-violet-600 font-medium text-2xl" href="/">Open Source</a>
+          </div>
+        </header>
+    <!-- NAVBAR -->
+    <main class="p-2">
 
-      <script src="src/main.js"></script>
+      <section id="initial-container" class="flex flex-row justify-around items-center px-20 mb-10">
+
+          <div class="flex flex-col">
+            <h1 class="text-violet-600 font-semibold text-5xl mb-8">Dúvidas?</h1>
+            <p class="text-white w-10/12 font-medium text-2xl">Tá com dificuldade naquela matéria ou só é curioso? Relaxa que aqui na Descomplica você vai sair com sua dúvida solucionada. Basta escrever ou até mesmo falar sua dúvida! Experimenta ai.</p>
+          </div>
+  
+          <img class="w-1/3" src="assets/Questions-cuate.png" alt="Ilustration by: Storyset.com"> <!-- BY storyset -->
+
+      </section>
+
+      <!-- CHAT -->
+      <section class="flex justify-center items-center w-full">
+        <textarea id="chat-area" class="hidden resize-none bg-zinc-900 w-11/12 rounded-xl placeholder-white p-10 placeholder-white text-white text-2xl" rows="16" disabled></textarea>
+      </section>
+      <!-- CHAT -->
+      
+      <section class="flex flex-col justify-center items-center w-full">
+  
+          <div class="flex flex-col justify-center items-center">
+            <img id="btn_mic" class="w-12 mb-2 mt-4" src="assets/microfone.png" alt="Microphone Ilustration by: Flaticon.com"> <!-- BY flaticon -->
+            <p id="mic-text" class="mb-4 text-white text-lg">Clique no Microfone ou pressione a tecla F para falar</p>
+          </div>
+  
+          <textarea id="question_area" class="resize-none bg-zinc-900 w-11/12 rounded-full focus:outline-none placeholder-white pl-4 pt-4 text-white" id="questionInput" placeholder="Qual sua dúvida?"></textarea>
+      </section>
+
+    </main>
+
+    <script src="src/main.js"></script>
   </body>
 </html>
