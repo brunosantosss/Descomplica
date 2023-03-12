@@ -1,4 +1,3 @@
-const OPENAI_API_KEY = "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";
 const question_area = document.getElementById('question_area');
 const chat_area = document.getElementById('chat-area');
 
