@@ -5,6 +5,12 @@
     --purple: #985eef;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--bgcolor);
 }
@@ -12,3 +18,14 @@ body {
 h1, a, p {
     font-family: 'Poppins', sans-serif;
 }
+
+/**/
+#initial-container {
+    transition: .6s;
+}
+
+.hide {
+    opacity: 0;
+    transform: translateX(-200px);
+}
+/**/

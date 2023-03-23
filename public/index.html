@@ -7,33 +7,71 @@
 
     <title>Descomplica</title>
 
-    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
     <!-- NAVBAR -->
-    <header class="flex flex-row justify-between items-center py-9 px-12">
-          <h1 class="text-violet-600 font-semibold text-3xl underline">Descomplica</h1>
+    <header class="flex flex-col md:flex-row justify-between items-center py-7 px-12">
+          <h1 class="text-violet-600 font-semibold text-3xl underline mb-6 md:mb-0">Descomplica</h1>
           <div class="flex gap-5">
-            <a class="text-violet-600 font-medium text-2xl" href="/">Sobre Nós</a>
-            <a class="text-violet-600 font-medium text-2xl" href="/">Open Source</a>
+            <a class="text-violet-600 font-medium text-xl md:text-2xl" href="/">Sobre Nós</a>
+            <a class="text-violet-600 font-medium text-xl md:text-2xl" href="/">Open Source</a>
           </div>
         </header>
     <!-- NAVBAR -->
+    <main class="h-full p-2">
+
+      <section id="initial-container" class="flex flex-col lg:flex-row  justify-around items-center px-5 lg:px-20 mb-10">
+
+          <div class="flex flex-col">
+            <h1 class="text-violet-600 font-semibold text-4xl mt-8 mb-8 md:text-5xl">Dúvidas?</h1>
+            <p class="text-white w-full lg:w-10/12 font-medium text-xl">Tá com dificuldade naquela matéria ou só é curioso? Relaxa que aqui na Descomplica você vai sair com sua dúvida solucionada. Basta escrever ou até mesmo falar sua dúvida! Experimenta ai.</p>
+          </div>
+  
+          <img class="sm:w-5/12 lg:w-1/3" src="assets/Questions-cuate.png" alt="Ilustration by: Storyset.com"> <!-- BY storyset -->
+
+      </section>
+
+      <!-- CHAT -->
+      <section class="flex justify-center items-center w-full md:mt-8">
+        <textarea id="chat-area" class="hidden resize-none bg-zinc-900 w-11/12 rounded-xl placeholder-white p-6 md:p-10 placeholder-white text-white text-xl" rows="16" disabled></textarea>
+      </section>
+      <!-- CHAT -->
+      
+      <section class="flex flex-col justify-center items-center w-full">
+  
+          <div class="flex flex-col justify-center items-center">
+            <img id="btn_mic" class="w-12 mb-2 mt-4" src="assets/microfone.png" alt="Microphone Ilustration by: Flaticon.com"> <!-- BY flaticon -->
+            <p id="mic-text" class="mb-4 text-white text-lg">Clique no Microfone para falar</p>
+          </div>
+  
+          <textarea id="question_area" class="resize-none bg-zinc-900 w-11/12 rounded-full focus:outline-none placeholder-white pl-4 pt-4 text-white" id="questionInput" placeholder="Qual sua dúvida?"></textarea>
+      </section>
+      
+    </main>
+
+    <script src="src/main.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
     
-    <section class="flex flex-row justify-around items-center px-20 mb-10">
-        <div class="flex flex-col">
-          <h1 class="text-violet-600 font-semibold text-5xl mb-8">Dúvidas?</h1>
-          <p class="text-white w-10/12 font-medium text-2xl">Tá com dificuldade naquela matéria ou só é curioso? Relaxa que aqui na Descomplica você vai sair com sua dúvida solucionada. Basta escrever ou até mesmo falar sua dúvida! Experimenta ai.</p>
-        </div>
-
-        <img class="w-1/3" src="assets/Questions-cuate.png" alt="Ilustration by: Storyset.com"> <!-- BY storyset -->
-    </section>
-
-    <section class="flex flex-col justify-center items-center w-full">
-        <img class="w-12 mb-6" src="assets/voice-search.png" alt="Microphone Ilustration by: Flaticon.com"> <!-- BY flaticon -->
-        <textarea class="resize-none bg-zinc-700 w-11/12 rounded-full focus:outline-none placeholder-white pl-4 pt-4 text-white" id="questionInput" placeholder="Qual sua dúvida?"></textarea>
-    </section>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAtJhN-JdbEVOMtUk1jObZ6PbuXhIekACA",
+        authDomain: "descomplicaeeep.firebaseapp.com",
+        projectId: "descomplicaeeep",
+        storageBucket: "descomplicaeeep.appspot.com",
+        messagingSenderId: "603605788892",
+        appId: "1:603605788892:web:f2c9852fe31ade4dbcec19"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
   </body>
 </html>
