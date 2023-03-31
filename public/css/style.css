@@ -28,4 +28,30 @@ h1, a, p {
     opacity: 0;
     transform: translateX(-200px);
 }
+
 /**/
+.ia-div, .person-div {
+    padding: 1.6em;
+}
+
+.ia-div {
+    background-color: #26292D;   
+}
+
+.teste::webkit-scroll {
+    width: 8px;
+    height: 8px;
+    background-color: var(--purple);
+    border-radius: 10px;
+}
+
+.teste::webkit-scroll {
+    background-color: red;
+}
+/**/
+
+@media (min-width: 1024px) { 
+    body {
+        overflow: hidden;
+    }
+}

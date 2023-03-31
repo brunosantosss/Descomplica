@@ -37,11 +37,13 @@
 
       <!-- CHAT -->
       <section class="flex justify-center items-center w-full md:mt-8">
-        <textarea id="chat-area" class="hidden resize-none bg-zinc-900 w-11/12 rounded-xl placeholder-white p-6 md:p-10 placeholder-white text-white text-xl" rows="16" disabled></textarea>
+        <div id="chat-area" class="teste hidden bg-zinc-900 w-11/12 h-96 rounded-xl text-white text-xl overflow-hidden overflow-y-scroll">
+            
+        </div>
       </section>
       <!-- CHAT -->
       
-      <section class="flex flex-col justify-center items-center w-full">
+      <section class="chat flex flex-col justify-center items-center w-full lg:absolute lg:bottom-0 lg:mb-5">
   
           <div class="flex flex-col justify-center items-center">
             <img id="btn_mic" class="w-12 mb-2 mt-4" src="assets/microfone.png" alt="Microphone Ilustration by: Flaticon.com"> <!-- BY flaticon -->
@@ -55,12 +57,8 @@
 
     <script src="src/main.js"></script>
     <script type="module">
-      // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
+
       const firebaseConfig = {
         apiKey: "AIzaSyAtJhN-JdbEVOMtUk1jObZ6PbuXhIekACA",
         authDomain: "descomplicaeeep.firebaseapp.com",
