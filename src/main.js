@@ -90,7 +90,7 @@ function SendQuestion(question) {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + "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",
+            Authorization: "Bearer " + "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",
         },
         body: JSON.stringify({
             model: "text-davinci-003",
@@ -106,8 +106,7 @@ function SendQuestion(question) {
       else if (json.choices?.[0].text) {
         var text = json.choices[0].text || "Não consegui achar uma respota para sua dúvida :(";
         writeConversation(text, true);
-      }
-
+    }
       chat_area.scrollTop = chat_area.scrollHeight;
     })
     .finally(() => {
@@ -120,6 +119,7 @@ function SendQuestion(question) {
   question_area.disabled = true;
   
   writeConversation(question, false);
+
   chat_area.scrollTop = chat_area.scrollHeight;
 }
 
@@ -129,6 +129,18 @@ function writeConversation(text, ia) {
         ia_div.classList.add("ia-div");
         ia_div.innerHTML = `Descomplica: <br><br>${text}`;
         chat_area.appendChild(ia_div);
+        
+        if ("speechSynthesis" in window) {
+            var SSU = new SpeechSynthesisUtterance();
+            var vozes = speechSynthesis.getVoices();
+            SSU.text = text;
+            SSU.volume = 1; 
+            SSU.rate = 0.9; 
+            SSU.pitch = 1; 
+            SSU.voice = vozes[1]; 
+
+            speechSynthesis.speak(SSU);
+        } 
     } 
     else {
         const person_div = document.createElement('div');
