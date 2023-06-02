@@ -5,54 +5,24 @@
     btn_mic = get microphone button
     Recognition = initialize the initRecognition class for voice recognition
 */
-const question_area = document.getElementById('question_area');
-const chat_area = document.getElementById('chat-area');
-const btn_mic = document.getElementById('btn_mic');
+
+const btn_mic = document.getElementById('robot-microfone');
 const Recognition = initRecognition(); 
 var Listening = false; 
 
-question_area.addEventListener("keypress", (e) => {
-    var initial_container = document.getElementById('initial-container');
-
-    if(question_area.value && e.key === "Enter") {
-        initial_container.classList.add("hide");
-
-        setTimeout(() => {
-            initial_container.classList.add("hidden");
-            chat_area.classList.remove("hidden");
-            chat_area.classList.add("block");
-        }, 600);
-        
-        SendQuestion(question_area.value);
-    }
-});
-
 btn_mic.addEventListener('click', (e) => {
     if(!Recognition) return;
-    
-    var mic_text = document.getElementById("mic-text");
 
     if(Listening) {
-        var initial_container = document.getElementById('initial-container');
-        mic_text.innerHTML = 'Clique no Microfone para falar';
         Recognition.stop();
-        
-        initial_container.classList.add("hide");
-
-        setTimeout(() => {
-            initial_container.classList.add("hidden");
-            chat_area.classList.remove("hidden");
-            chat_area.classList.add("block");
-        }, 600);
     } 
     else if(Recognition) {
-        mic_text.innerHTML = 'Clique no Microfone parar de falar';
         Recognition.start();
     }
     else {
-        mic_text.innerHTML = 'Clique no Microfone parar de falar';
         Recognition.start();
     }
+    console.log("Test");
 });
 
 /*
@@ -65,7 +35,7 @@ function initRecognition() {
     const gRecognition = SpeechRecognition !== undefined ? new SpeechRecognition() : null;
 
     if(!gRecognition) {
-        alert("Infelizmente seu navegador atual não possui suporte ao uso de Microfone. Tente utilizar o campo de digitação")
+        alert("Infelizmente seu navegador atual não possui suporte ao uso de Microfone. Tente utilizar o campo de digitação");
         return null;
     }
 
@@ -80,72 +50,51 @@ function initRecognition() {
     return gRecognition;
 }
 
-function SendQuestion(question) {
+async function SendQuestion(question) {
     
     if(!question)
-        return writeConversation("Desculpa, não consegui entender :(", true);
+        return writeConversation("Desculpe, não consegui entender");
 
-    fetch("https://api.openai.com/v1/completions", {
+    await fetch("https://api.openai.com/v1/completions", {
         method: "POST",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + "API_KEY",
+            Authorization: "Bearer API_KEY",
         },
         body: JSON.stringify({
             model: "text-davinci-003",
             prompt: question,
-            max_tokens: 2048, // tamanho da resposta
+            max_tokens: 1512, // tamanho da resposta
             temperature: 1, // criatividade na resposta
         }),
     })
     .then((response) => response.json())
     .then((json) => {
-      if (json.error?.message) writeConversation("Infelizmente aconteceu algum erro.", true);
+        console.log(json)
+        if (json.error?.message) writeConversation("Aconteceu algum problema, infelizmente não consegui obter uma resposta para sua pergunta.");
 
-      else if (json.choices?.[0].text) {
-        var text = json.choices[0].text || "Não consegui achar uma respota para sua dúvida :(";
-        writeConversation(text, true);
+        else if (json.choices?.[0].text) {
+            var response = json.choices[0].text || "Não consegui achar uma respota para sua dúvida.";
+
+            writeConversation(response);
+            console.log(response);
     }
-      chat_area.scrollTop = chat_area.scrollHeight;
+
     })
-    .finally(() => {
-      question_area.value = "";
-      question_area.disabled = false;
-      question_area.focus();
-    });
-
-  question_area.value = "Gerando resposta..";
-  question_area.disabled = true;
-  
-  writeConversation(question, false);
-
-  chat_area.scrollTop = chat_area.scrollHeight;
 }
 
-function writeConversation(text, ia) {
-    if(ia) {
-        const ia_div = document.createElement('div');
-        ia_div.classList.add("ia-div");
-        ia_div.innerHTML = `Descomplica: <br><br>${text}`;
-        chat_area.appendChild(ia_div);
-        
-        if ("speechSynthesis" in window) {
-            var SSU = new SpeechSynthesisUtterance();
-            var vozes = speechSynthesis.getVoices();
-            SSU.text = text;
-            SSU.volume = 1; 
-            SSU.rate = 0.9; 
-            SSU.pitch = 1; 
-            SSU.voice = vozes[1]; 
+function writeConversation(text) {
+    if ("speechSynthesis" in window) {
+        var SSU = new SpeechSynthesisUtterance();
+        var vozes = speechSynthesis.getVoices();
+        SSU.text = text;
+        SSU.volume = 1; 
+        SSU.rate = 1; 
+        SSU.pitch = 1; 
+        SSU.voice = vozes[1]; 
 
-            speechSynthesis.speak(SSU);
-        } 
+        speechSynthesis.speak(SSU);
     } 
-    else {
-        const person_div = document.createElement('div');
-        person_div.classList.add("person-div");
-        person_div.innerHTML = `Você:   ${text}`;
-        chat_area.appendChild(person_div);
-    }
+
 }
